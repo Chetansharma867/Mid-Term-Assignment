@@ -1,0 +1,70 @@
+public class KthSmallestInMatrix {
+    public static int kthSmallest(int[][] matrix, int k) {
+        int n = matrix.length;
+        int low = matrix[0][0];
+        int high = matrix[n - 1][n - 1];
+
+        while (low < high) {
+            int mid = low + (high - low) / 2;
+            int count = countLessEqual(matrix, mid, n);
+
+            if (count < k) {
+                low = mid + 1;
+            } else {
+                high = mid;
+            }
+        }
+        return low;
+    }
+
+    // Helper to count elements ≤ mid
+    private static int countLessEqual(int[][] matrix, int mid, int n) {
+        int count = 0;
+        int row = n - 1;
+        int col = 0;
+
+        while (row >= 0 && col < n) {
+            if (matrix[row][col] <= mid) {
+                count += (row + 1);
+                col++;
+            } else {
+                row--;
+            }
+        }
+        return count;
+    }
+
+    public static void main(String[] args) {
+        int[][] matrix = {
+            {1,  5,  9},
+            {10, 11, 13},
+            {12, 13, 15}
+        };
+
+        int k = 8;
+        int result = kthSmallest(matrix, k);
+        System.out.println("The " + k + "-th smallest element is: " + result);
+    }
+    
+}
+
+// Time and Space Complexity:
+
+// Time	= O(n * log(max-min))
+// Space =	O(1)
+
+
+// Algorithm (Binary Search on Value Range):
+// Set low = matrix[0][0] and high = matrix[n-1][n-1]
+
+// While low < high:
+
+// mid = (low + high) / 2
+
+// Count how many elements are ≤ mid
+
+// If count < k → move low = mid + 1
+
+// Else → move high = mid
+
+// At the end, low will be the k-th smallest element
