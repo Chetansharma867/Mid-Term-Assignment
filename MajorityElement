@@ -1,0 +1,54 @@
+public class MajorityElement {
+    public static int findMajorityElement(int[] nums) {
+        int count = 0;
+        int candidate = 0;
+
+        for (int num : nums) {
+            if (count == 0) {
+                candidate = num;
+            }
+            count += (num == candidate) ? 1 : -1;
+        }
+
+        
+        int freq = 0;
+        for (int num : nums) {
+            if (num == candidate) freq++;
+        }
+
+        if (freq > nums.length / 2)
+            return candidate;
+        else
+            return -1; 
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {2, 2, 1, 1, 2, 2, 2};
+        int result = findMajorityElement(arr);
+        System.out.println("Majority element is: " + result);
+    }
+    
+}
+
+// Time and Space Complexity:
+
+// Time	= O(n)
+// Space =	O(1)
+
+
+// Algorithm (Boyer-Moore Voting Algorithm):
+// Initialize:
+
+// count = 0
+
+// candidate = None
+
+// Traverse the array:
+
+// If count == 0, set candidate = current element
+
+// If element == candidate, increment count
+
+// Else decrement count
+
+// At the end, candidate is the majority element.
