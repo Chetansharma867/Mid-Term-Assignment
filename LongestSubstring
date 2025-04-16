@@ -1,0 +1,51 @@
+import java.util.HashSet;
+
+public class LongestSubstring {
+    public static int lengthOfLongestSubstring(String s) {
+        int n = s.length();
+        int maxLen = 0;
+
+        HashSet<Character> set = new HashSet<>();
+        int left = 0;
+
+        for (int right = 0; right < n; right++) {
+            char currentChar = s.charAt(right);
+
+           
+            while (set.contains(currentChar)) {
+                set.remove(s.charAt(left));
+                left++;
+            }
+
+            
+            set.add(currentChar);
+            maxLen = Math.max(maxLen, right - left + 1);
+        }
+
+        return maxLen;
+    }
+
+    public static void main(String[] args) {
+        String s = "abcabcbb";
+        int length = lengthOfLongestSubstring(s);
+        System.out.println("Length of longest substring without repeating characters: " + length);
+    }
+    
+}
+
+// Time and Space Complexity:
+ //time=O(n)
+ //space=O(k)
+
+//  Algorithm (Sliding Window + HashSet):
+// Use two pointers: left and right to form a window.
+
+// Use a HashSet to store characters in the current window.
+
+// Move right pointer:
+
+// If character not in set, add to set and update max length.
+
+// If character is already in set, remove characters from the left until it becomes unique.
+
+// Continue till right reaches the end of the string
