@@ -1,0 +1,82 @@
+public class RemoveNthFromEnd {
+    static class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode(int val) {
+            this.val = val;
+        }
+    }
+
+    public static ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode dummy = new ListNode(0); // dummy node to handle edge cases
+        dummy.next = head;
+
+        ListNode first = dummy;
+        ListNode second = dummy;
+
+        // Move first n+1 steps ahead
+        for (int i = 0; i <= n; i++) {
+            first = first.next;
+        }
+
+        // Move both pointers until first reaches end
+        while (first != null) {
+            first = first.next;
+            second = second.next;
+        }
+
+        // Remove the n-th node from end
+        second.next = second.next.next;
+
+        return dummy.next; // return new head
+    }
+
+    // Helper function to print the linked list
+    public static void printList(ListNode head) {
+        while (head != null) {
+            System.out.print(head.val + (head.next != null ? " → " : ""));
+            head = head.next;
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        // Example: 1 → 2 → 3 → 4 → 5, n = 2
+        ListNode head = new ListNode(1);
+        head.next = new ListNode(2);
+        head.next.next = new ListNode(3);
+        head.next.next.next = new ListNode(4);
+        head.next.next.next.next = new ListNode(5);
+
+        System.out.print("Original list: ");
+        printList(head);
+
+        int n = 2;
+        head = removeNthFromEnd(head, n);
+
+        System.out.print("Updated list: ");
+        printList(head);
+    }
+    
+}
+
+// Time and Space Complexity:
+
+// Time =	O(n)
+// Space =	O(1)
+
+// Algorithm (One-Pass, Two-Pointer Approach):
+// Create a dummy node pointing to head.
+
+// Initialize two pointers: first and second, both at dummy.
+
+// Move first forward by n + 1 steps.
+
+// Move first and second one step at a time until first becomes null.
+
+// second will be right before the node to delete.
+
+// Skip the node: second.next = second.next.next
+
+// Return dummy.next (updated head)
