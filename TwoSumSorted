@@ -1,0 +1,50 @@
+public class TwoSumSorted {
+    public static void findTwoSum(int[] arr, int target) {
+        int left = 0;
+        int right = arr.length - 1;
+
+        while (left < right) {
+            int sum = arr[left] + arr[right];
+
+            if (sum == target) {
+                // Found the pair
+                System.out.println("Pair found at indices: " + (left + 1) + " and " + (right + 1));
+                return;
+            } else if (sum < target) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+
+        System.out.println("No such pair found.");
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {1, 2, 4, 6, 10};
+        int target = 8;
+
+        findTwoSum(arr, target);
+    }
+    
+}
+
+//Time and Space Complexity:
+
+// Time=O(n)
+// Space=O(1)
+
+// Algorithm (Two Pointers):
+// Initialize two pointers: left = 0, right = n - 1.
+
+// While left < right:
+
+// Compute sum = arr[left] + arr[right]
+
+// If sum == target → return indices.
+
+// If sum < target → move left forward.
+
+// If sum > target → move right backward.
+
+// If no pair is found, return a message.
