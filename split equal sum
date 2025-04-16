@@ -1,0 +1,51 @@
+public class ArraySplitEqual {
+    static boolean SplitEqualSum(int[] arr) {
+        int totalSum = 0;
+        for (int num : arr) {
+            totalSum += num;
+        }
+
+        int leftSum = 0;
+        for (int i = 0; i < arr.length - 1; i++) { 
+            leftSum += arr[i];
+            int rightSum = totalSum - leftSum;
+            if (leftSum == rightSum) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {1, 2, 3, 4, 10};
+
+        boolean Split = SplitEqualSum(arr);
+
+        if (Split) {
+            System.out.println("Yes, split with equal prefix and suffix sum.");
+        } else {
+            System.out.println("No, split is not possible.");
+        }
+    }
+}
+
+//Time and Space Complexity:
+//Time=O(n)
+//space=O(1)
+
+// Algorithm:
+// Calculate the total sum of the array.
+
+// Initialize leftSum = 0.
+
+// Loop through the array:
+
+// Subtract arr[i] from total sum to get rightSum.
+
+// If leftSum == rightSum, return true.
+
+// Else, add arr[i] to leftSum.
+
+// If no such index is found, return false.
+
