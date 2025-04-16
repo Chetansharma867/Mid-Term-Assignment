@@ -1,0 +1,48 @@
+public class MaxSumSubarraySizeK {
+    static int maxSumK(int[] arr, int k) {
+        int n = arr.length;
+
+        if (n < k) {
+            System.out.println("Invalid: k is larger than array size");
+            return -1;
+        }
+
+        // Step 1: Compute sum of first window
+        int windowSum = 0;
+        for (int i = 0; i < k; i++) {
+            windowSum += arr[i];
+        }
+
+        int maxSum = windowSum;
+
+        // Step 2: Slide the window
+        for (int i = k; i < n; i++) {
+            windowSum = windowSum - arr[i - k] + arr[i];
+            maxSum = Math.max(maxSum, windowSum);
+        }
+
+        return maxSum;
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {1, 4, 2, 10, 23, 3, 1, 0, 20};
+        int k = 4;
+
+        int result = maxSumK(arr, k);
+        System.out.println("Maximum sum of subarray of size " + k + " is: " + result);
+    }
+}
+
+// Time and Space Complexity:
+//time=O(n)
+//space=(1)
+
+// Algorithm (Sliding Window):
+
+// Calculate the sum of the first k elements.
+// Initialize maxSum with this value.
+// Slide the window by one element at a time:
+  // Subtract the element going out of the window (arr[i-k])
+  // Add the new element coming into the window (arr[i])
+  // Update maxSum if needed.
+// Return maxSum.
