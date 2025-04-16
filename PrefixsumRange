@@ -1,0 +1,47 @@
+public class PrefixsumRange {
+     static int [] PrefixSum(int[] arr){
+        int n =arr.length;
+        int sum[]=new int[n];
+        sum[0]=arr[0];
+        for(int i=1;i<n;i++){
+            sum[i]=sum[i-1]+arr[i];
+        }
+        return sum;
+
+
+    }
+    static int RangeSum(int[] sum,int l,int r){
+        if(l==0){
+            return sum[r];
+        }else{
+            return sum[r]-sum[l-1];
+        }
+    }
+    public static void main(String args[]){
+        int arr[]={10,20,30,40,50,60};
+        int n=arr.length;
+        System.out.print("Original array:");
+        for(int i=0;i<n;i++){
+            System.out.print(arr[i]+" ");
+        }
+        int prefix[]=PrefixSum(arr);
+        System.out.print("\nPrefix Sum array:");
+        for(int i=0;i<n;i++){
+            System.out.print(prefix[i]+" ");
+     }
+        System.out.print("\nRange Sum Queries: ");
+        int l=2,r=5;
+        System.out.print("\nSum Of range[ " + l + ","+ r + "]=" +RangeSum(prefix,l,r));
+
+        l=0;r=3;
+        System.out.println("\nSum Of range[" + l + "," + r + "] ="+ RangeSum(prefix,l,r));
+
+        
+    }
+}
+
+
+
+//time and space complexity
+//time=O(n)
+//space=O(n)
