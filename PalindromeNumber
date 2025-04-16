@@ -1,0 +1,54 @@
+public class PalindromeNumber {
+    public static boolean isPalindrome(int x) {
+        if (x < 0 || (x % 10 == 0 && x != 0)) {
+            return false;
+        }
+
+        int reversed = 0;
+
+        
+        while (x > reversed) {
+            int lastDigit = x % 10;
+            reversed = reversed * 10 + lastDigit;
+            x = x / 10;
+        }
+
+        
+        return (x == reversed || x == reversed / 10);
+    }
+
+    
+    public static void main(String[] args) {
+        int number = 1221;
+        if (isPalindrome(number)) {
+            System.out.println(number + " is a palindrome.");
+        } else {
+            System.out.println(number + " is not a palindrome.");
+        }
+    }
+    
+}
+
+// Time and Space Complexity:
+
+// Time	= O(log n)
+// Space = O(1)
+
+
+
+// Algorithm:
+// Handle edge cases:
+
+// If x is negative, it's not a palindrome (because negative numbers are not palindromes).
+
+// If x ends in 0 and is not 0, it can't be a palindrome (e.g., 10, 20, etc.).
+
+// Reverse half of the number:
+
+// Reverse the second half of the number and compare it with the first half.
+
+// If the reversed second half equals the first half (or the first half with one digit removed for odd-length numbers), the number is a palindrome.
+
+// Steps:
+
+// Divide the number by 10 until the remaining number is less than or equal to the reversed part.
